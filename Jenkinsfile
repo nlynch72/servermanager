@@ -1,4 +1,4 @@
-node ('os-patch'){
+node (){
     // Mark the code checkout 'stage'....
     stage 'Checkout'
 
@@ -8,5 +8,5 @@ node ('os-patch'){
     // Mark the code build 'stage'....
     stage 'Build'
     // Run the maven build
-    sh "gradlew build"
+    sh "./gradlew build"
 }
