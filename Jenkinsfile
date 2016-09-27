@@ -1,12 +1,7 @@
-node (){
-    // Mark the code checkout 'stage'....
+docker.image('niaquinto/gradle').inside {
     stage 'Checkout'
-
-    // Checkout code from repository
-    checkout scm
-
-    // Mark the code build 'stage'....
+    git credentialsId: 'niel_github', url: 'https://github.com/nlynch72/servermanager.git'
+    
     stage 'Build'
-    // Run the maven build
     sh "./gradlew build"
 }
