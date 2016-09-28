@@ -1,12 +1,16 @@
-node (){
-    // Mark the code checkout 'stage'....
-    stage 'Checkout'
+node('docker'){
+    docker.image('niaquinto/gradle').inside {
+        stage('build') {
+            
+            checkout scm
+            sh "./gradlew build"
+            junit "build/**/*.xml"  
 
-    // Checkout code from repository
-    checkout scm
+            //clean up will always run
+            step([$class: 'WsCleanup'])
 
-    // Mark the code build 'stage'....
-    stage 'Build'
-    // Run the maven build
-    sh "./gradlew build"
+        }
+    }
 }
+
+
