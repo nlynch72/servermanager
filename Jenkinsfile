@@ -5,5 +5,8 @@ node('docker'){
 
         stage 'Build'
         sh "./gradlew build"
+        junit "build/**/*.xml"
+        step([$class: 'WsCleanup'])
     }
 }
+
