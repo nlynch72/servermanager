@@ -1,12 +1,16 @@
 node('docker'){
     docker.image('niaquinto/gradle').inside {
-        stage 'Checkout'
-        git credentialsId: 'niel_github', url: 'https://github.com/nlynch72/servermanager.git'
-
-        stage 'Build'
+        
+        checkout scm
+        
         sh "./gradlew build"
-        junit "build/**/*.xml"
+   
+        junit "build/**/*.xml"  
+   
+        //clean up will always run
         step([$class: 'WsCleanup'])
+       
     }
 }
+
 
